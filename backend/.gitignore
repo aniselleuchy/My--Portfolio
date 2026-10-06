@@ -54,3 +54,4 @@ htmlcov/
 
 *.sqlite
 *.sqlite3
+*.zip
