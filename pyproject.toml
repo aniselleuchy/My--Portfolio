@@ -3,6 +3,7 @@ name = "my-portfolio"
 version = "0.1.0"
 requires-python = ">=3.14"
 dependencies = [
+    "gunicorn>=26.2.0",
     "myapplication>=0.1.0",
 ]
 
