@@ -5,6 +5,7 @@ requires-python = ">=3.14"
 dependencies = [
     "gunicorn>=26.2.0",
     "myapplication>=0.1.0",
+    "uvicorn>=0.53.0",
 ]
 
 [tool.uv.workspace]
