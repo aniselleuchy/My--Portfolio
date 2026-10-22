@@ -10,3 +10,7 @@ dependencies = [
 members = [
     "backend",
 ]
+uv add gunicorn
+git add pyproject.toml uv.lock
+git commit -m "Add gunicorn"
+git push
