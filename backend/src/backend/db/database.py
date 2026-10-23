@@ -1,3 +1,6 @@
+import os
+
+import certifi
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
@@ -15,13 +18,18 @@ DATABASE_URL = (
 )
 
 
+connect_args = {"connect_timeout": 10}
+
+# TLS is required by TiDB Cloud; enabled only when DB_SSL=true (set on Render)
+if os.getenv("DB_SSL", "").lower() == "true":
+    connect_args["ssl"] = {"ca": certifi.where()}
+
+
 engine = create_engine(
     DATABASE_URL,
     pool_pre_ping=True,
     pool_recycle=280,
-    connect_args={
-        "connect_timeout": 5
-    }
+    connect_args=connect_args,
 )
 
 SessionLocal = sessionmaker(
