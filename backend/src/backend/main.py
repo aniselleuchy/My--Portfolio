@@ -8,6 +8,8 @@ from src.backend.routers.experience import router as experience_router
 from src.backend.routers.messages import router as messages_router
 from src.backend.routers.admin import router as admin_router
 from src.backend.routers.ai import router as ai_router
+from src.backend.db.database import Base, engine
+
 
 
 app = FastAPI(
@@ -15,7 +17,6 @@ app = FastAPI(
     description="Backend for Portfolio, Admin Panel, Client Dashboard and AI Agent",
     version="1.0.0"
 )
-
 
 app.add_middleware(
     CORSMiddleware,
@@ -43,7 +44,10 @@ def root():
     return {
         "message": "Portfolio API is running"
     }
-
+try:
+    Base.metadata.create_all(bind=engine)
+except Exception as exc:
+    print(f"create_all failed: {exc}")
 
 @app.get("/api/health")
 def health():
